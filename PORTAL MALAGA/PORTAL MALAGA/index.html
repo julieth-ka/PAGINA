@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Málaga, Santander - Lugares Destacados</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.9), rgba(118, 75, 162, 0.9)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 300"><defs><linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" style="stop-color:%23667eea;stop-opacity:0.3" /><stop offset="100%" style="stop-color:%23764ba2;stop-opacity:0.3" /></linearGradient></defs><path d="M0,100 Q250,50 500,100 T1000,100 L1000,300 L0,300 Z" fill="url(%23grad1)"/></svg>');
+            background-size: cover;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 20px rgba(0,0,0,0.3);
+            letter-spacing: 2px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            font-weight: 300;
+            opacity: 0.9;
+            margin-bottom: 30px;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .hero-location {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 25px;
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        /* Floating Elements */
+        .floating-element {
+            position: absolute;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-element:nth-child(1) {
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-element:nth-child(2) {
+            top: 60%;
+            right: 15%;
+            animation-delay: 2s;
+        }
+
+        .floating-element:nth-child(3) {
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+
+        /* Main Container */
+        .main-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px 30px 0 0;
+            padding: 60px 40px;
+            margin: -60px 0 0 0;
+            box-shadow: 0 -10px 50px rgba(0, 0, 0, 0.1),
+                        0 0 0 1px rgba(102, 126, 234, 0.1);
+            position: relative;
+            z-index: 3;
+            border: 2px solid transparent;
+            background-clip: padding-box;
+        }
+        
+        .main-container::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            padding: 2px;
+            background: linear-gradient(135deg, #667eea, #764ba2, #ff6b6b, #4ecdc4);
+            border-radius: 30px;
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+            -webkit-mask-composite: xor;
+            opacity: 0.3;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            padding: 20px;
+            border: 2px solid transparent;
+            border-radius: 20px;
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
+            background-image: linear-gradient(white, white),
+                              linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #ff6b6b 100%);
+            border-radius: 2px;
+            box-shadow: 0 2px 10px rgba(102, 126, 234, 0.3);
+        }
+
+        /* Cards */
+        .place-card {
+            background: white;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1), 
+                        0 0 0 1px rgba(102, 126, 234, 0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            height: 100%;
+            position: relative;
+            border: 2px solid transparent;
+            background-clip: padding-box;
+        }
+        
+        .place-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            padding: 2px;
+            background: linear-gradient(135deg, #667eea, #764ba2, #ff6b6b, #4ecdc4);
+            border-radius: 25px;
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+            -webkit-mask-composite: xor;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .place-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(102, 126, 234, 0.25),
+                        0 10px 30px rgba(118, 75, 162, 0.15),
+                        0 0 0 1px rgba(102, 126, 234, 0.2);
+        }
+        
+        .place-card:hover::before {
+            opacity: 1;
+        }
+
+        .card-image-container {
+            position: relative;
+            overflow: hidden;
+            height: 280px;
+            border-bottom: 3px solid transparent;
+            background: linear-gradient(135deg, #667eea, #764ba2) border-box;
+            background-clip: border-box;
+        }
+        
+        .card-image-container::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #ff6b6b 100%);
+        }
+
+        .place-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .place-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(102, 126, 234, 0.8), rgba(118, 75, 162, 0.8));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .place-card:hover .image-overlay {
+            opacity: 1;
+        }
+
+        .overlay-text {
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-align: center;
+            transform: translateY(20px);
+            transition: transform 0.4s ease;
+        }
+
+        .place-card:hover .overlay-text {
+            transform: translateY(0);
+        }
+
+        .card-content {
+            padding: 30px;
+            position: relative;
+            background: linear-gradient(135deg, #ffffff 0%, #fafbff 100%);
+            border-left: 4px solid transparent;
+            border-right: 4px solid transparent;
+            border-image: linear-gradient(135deg, #667eea, #764ba2) 1;
+        }
+        
+        .card-content::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            opacity: 0.3;
+            transition: opacity 0.3s ease;
+        }
+        
+        .place-card:hover .card-content::before {
+            opacity: 1;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .card-title i {
+            color: #667eea;
+            font-size: 1.3rem;
+        }
+
+        .card-description {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .card-footer {
+            background: linear-gradient(135deg, #f8f9ff 0%, #e8ecff 100%);
+            padding: 20px 30px;
+            border-top: 2px solid rgba(102, 126, 234, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card-footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #667eea, #764ba2, transparent);
+            transition: left 0.6s ease;
+        }
+        
+        .place-card:hover .card-footer::before {
+            left: 100%;
+        }
+
+        .category-badge {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .category-badge::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s ease;
+        }
+        
+        .place-card:hover .category-badge::before {
+            left: 100%;
+        }
+
+        .map-link {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 2px solid transparent;
+            background: linear-gradient(white, white) padding-box,
+                        linear-gradient(135deg, #667eea, #764ba2) border-box;
+        }
+
+        .map-link:hover {
+            color: white;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        /* Scroll Animation */
+        .place-card {
+            animation: fadeInUp 0.8s ease-out both;
+        }
+
+        .place-card:nth-child(1) { animation-delay: 0.1s; }
+        .place-card:nth-child(2) { animation-delay: 0.2s; }
+        .place-card:nth-child(3) { animation-delay: 0.3s; }
+        .place-card:nth-child(4) { animation-delay: 0.4s; }
+        .place-card:nth-child(5) { animation-delay: 0.5s; }
+        .place-card:nth-child(6) { animation-delay: 0.6s; }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            margin-top: 60px;
+            position: relative;
+            overflow: hidden;
+            border-top: 4px solid transparent;
+            border-image: linear-gradient(90deg, #ff6b6b, #667eea, #764ba2, #4ecdc4) 1;
+        }
+        
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+            animation: shimmer 3s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .footer-content {
+            font-size: 1.1rem;
+            font-weight: 300;
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer-author {
+            font-weight: 600;
+            margin-top: 15px;
+            padding: 10px 20px;
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            display: inline-block;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .main-container {
+                padding: 40px 20px;
+                margin: -40px 0 0 0;
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+        }
+
+        /* Botón de volver al inicio */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            text-decoration: none;
+            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 8px 30px rgba(102, 126, 234, 0.6);
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+            color: rgb(255, 255, 255);
+        }
+
+        .back-to-top::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            padding: 2px;
+            background: linear-gradient(135deg, #667eea, #764ba2, #ff6b6b);
+            border-radius: 50%;
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+            -webkit-mask-composite: xor;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .back-to-top:hover::before {
+            opacity: 1;
+        }
+
+       
+
+        .home-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(102, 126, 234, 0.6);
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+            color: white;
+        }
+
+        .home-button i {
+            margin-right: 8px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="floating-element">
+            <i class="fas fa-mountain" style="font-size: 2rem; color: rgba(255,255,255,0.3);"></i>
+        </div>
+        <div class="floating-element">
+            <i class="fas fa-church" style="font-size: 1.5rem; color: rgba(255,255,255,0.3);"></i>
+        </div>
+        <div class="floating-element">
+            <i class="fas fa-tree" style="font-size: 1.8rem; color: rgba(255,255,255,0.3);"></i>
+        </div>
+        
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <i class="fas fa-map-marker-alt"></i> Málaga
+                </h1>
+                <p class="hero-subtitle">Descubre los Tesoros de Nuestra Hermosa Región</p>
+                <div class="hero-location">
+                    <i class="fas fa-location-dot"></i> Santander, Colombia
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+               
+
+            
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                <!-- Escudo Municipal -->
+                <div class="col">
+                    <div class="place-card">
+                        <div class="card-image-container">
+                            <img src="ESCUDO  MALAGA.jpg" alt="Escudo de Málaga Santander">
+                            <div class="image-overlay">
+                                <div class="overlay-text">Símbolo de Nuestra Identidad</div>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h5 class="card-title">
+                                <i class="fas fa-shield-alt"></i>
+                                Escudo Municipal
+                            </h5>
+                            <p class="card-description">
+                                Símbolo oficial que representa la identidad, historia y valores de nuestro querido municipio, con elementos que reflejan la riqueza cultural y natural de la región.
+                            </p>
+                        </div>
+                        <div class="card-footer">
+                            <span class="category-badge">Símbolo Oficial</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ubicación Geográfica -->
+                <div class="col">
+                    <div class="place-card">
+                        <div class="card-image-container">
+                            <img src="Colombia_-_Santander_-_Málaga.svg.png" alt="Mapa de Málaga Santander">
+                            <div class="image-overlay">
+                                <div class="overlay-text">Nuestra Posición Estratégica</div>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h5 class="card-title">
+                                <i class="fas fa-map-marked-alt"></i>
+                                Ubicación Geográfica
+                            </h5>
+                            <p class="card-description">
+                                Estratégicamente ubicada en el corazón de Santander, Colombia. Un municipio privilegiado en la región andina, conocido por su clima templado y paisajes montañosos.
+                            </p>
+                        </div>
+                        <div class="card-footer">
+                            <span class="category-badge">Geografía</span>
+                            <a href="https://www.google.com/maps/place/M%C3%A1laga,+Santander" class="map-link" target="_blank" rel="noopener noreferrer">
+                                <i class="fas fa-external-link-alt"></i> Ver Mapa
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Iglesia Principal -->
+                <div class="col">
+                    <div class="place-card">
+                        <div class="card-image-container">
+                            <img src="IGLESIA MALAGA.jpg" alt="Iglesia de Málaga Santander">
+                            <div class="image-overlay">
+                                <div class="overlay-text">Centro Espiritual</div>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h5 class="card-title">
+                                <i class="fas fa-church"></i>
+                                Iglesia Principal
+                            </h5>
+                            <p class="card-description">
+                                Majestuoso templo católico, corazón espiritual de nuestra comunidad. Su arquitectura colonial y campanario son símbolos históricos del municipio.
+                            </p>
+                        </div>
+                        <div class="card-footer">
+                            <span class="category-badge">Patrimonio Religioso</span>
+                            <a href="https://www.google.com/maps/place/Catedral+de+la+Inmaculada+Concepci%C3%B3n" class="map-link" target="_blank" rel="noopener noreferrer">
+                                <i class="fas fa-external-link-alt"></i> Ver Mapa
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Alcaldía Municipal -->
+                <div class="col">
+                    <div class="place-card">
+                        <div class="card-image-container">
+                            <img src="ALCALDIA MALAGA.png" alt="Alcaldía de Málaga Santander">
+                            <div class="image-overlay">
+                                <div class="overlay-text">Sede del Gobierno Local</div>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h5 class="card-title">
+                                <i class="fas fa-building"></i>
+                                Alcaldía Municipal
+                            </h5>
+                            <p class="card-description">
+                                Centro administrativo donde se gestiona el desarrollo de nuestro municipio. Punto de encuentro entre la ciudadanía y el gobierno local.
+                            </p>
+                        </div>
+                        <div class="card-footer">
+                            <span class="category-badge">Gobierno Local</span>
+                            <a href="https://www.google.com/maps/place/Alcald%C3%ADa+Municipal+de+M%C3%A1laga" class="map-link" target="_blank" rel="noopener noreferrer">
+                                <i class="fas fa-external-link-alt"></i> Ver Mapa
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Parque Principal -->
+                <div class="col">
+                    <div class="place-card">
+                        <div class="card-image-container">
+                            <img src="PARQUE PRICIPAL MALAGA.jpg" alt="Parque Principal de Málaga Santander">
+                            <div class="image-overlay">
+                                <div class="overlay-text">Corazón Social del Municipio</div>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h5 class="card-title">
+                                <i class="fas fa-tree"></i>
+                                Parque Principal
+                            </h5>
+                            <p class="card-description">
+                                Espacio verde donde se reúnen las familias malagueñas. Punto de encuentro para eventos culturales, festividades y momentos de esparcimiento.
+                            </p>
+                        </div>
+                        <div class="card-footer">
+                            <span class="category-badge">Recreación</span>
+                            <a href="https://www.google.com/maps/place/Parque+Principal+de+M%C3%A1laga" class="map-link" target="_blank" rel="noopener noreferrer">
+                                <i class="fas fa-external-link-alt"></i> Ver Mapa
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hospital -->
+                <div class="col">
+                    <div class="place-card">
+                        <div class="card-image-container">
+                            <img src="HOSPITAL MALAGA SANTANDER.jpg" alt="Hospital de Málaga Santander">
+                            <div class="image-overlay">
+                                <div class="overlay-text">Cuidamos tu Salud</div>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h5 class="card-title">
+                                <i class="fas fa-hospital"></i>
+                                Hospital Municipal
+                            </h5>
+                            <p class="card-description">
+                                Centro de salud principal que brinda atención médica integral a nuestra comunidad. Equipado con servicios de urgencias y consulta externa.
+                            </p>
+                        </div>
+                        <div class="card-footer">
+                            <span class="category-badge">Salud Pública</span>
+                            <a href="https://www.google.com/maps/place/Hospital+Regional+de+Garc%C3%ADa+Rovira" class="map-link" target="_blank" rel="noopener noreferrer">
+                                <i class="fas fa-external-link-alt"></i> Ver Mapa
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Aeropuerto -->
+                <div class="col">
+                    <div class="place-card">
+                        <div class="card-image-container">
+                            <img src="AEROPUESTO MALAGA.jpg" alt="Aeropuerto de Málaga Santander">
+                            <div class="image-overlay">
+                                <div class="overlay-text">Conectando con el Mundo</div>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h5 class="card-title">
+                                <i class="fas fa-plane"></i>
+                                Aeropuerto Regional
+                            </h5>
+                            <p class="card-description">
+                                Puerta de entrada aérea que conecta nuestro municipio con el mundo. Infraestructura clave para el desarrollo económico y turístico regional.
+                            </p>
+                        </div>
+                        <div class="card-footer">
+                            <span class="category-badge">Transporte</span>
+                            <a href="https://www.google.com/maps/place/Aeropuerto+Jer%C3%B3nimo+de+Aguayo" class="map-link" target="_blank" rel="noopener noreferrer">
+                                <i class="fas fa-external-link-alt"></i> Ver Mapa
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mirador Peña del Cabro -->
+                <div class="col">
+                    <div class="place-card">
+                        <div class="card-image-container">
+                            <img src="peña del cabro  malaga santader.webp" alt="Mirador Peña del Cabro">
+                            <div class="image-overlay">
+                                <div class="overlay-text">Vistas Espectaculares</div>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h5 class="card-title">
+                                <i class="fas fa-mountain"></i>
+                                Mirador Peña del Cabro
+                            </h5>
+                            <p class="card-description">
+                                Atractivo natural que ofrece vistas panorámicas impresionantes. Destino perfecto para el ecoturismo, senderismo y contemplación de la naturaleza.
+                            </p>
+                        </div>
+                        <div class="card-footer">
+                            <span class="category-badge">Ecoturismo</span>
+                            <a href="https://www.google.com/maps/place/Mirador+Pe%C3%B1a+del+Cabro" class="map-link" target="_blank" rel="noopener noreferrer">
+                                <i class="fas fa-external-link-alt"></i> Ver Mapa
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Plaza de Mercado -->
+                <div class="col">
+                    <div class="place-card">
+                        <div class="card-image-container">
+                            <img src="WhatsApp Image 2025-07-17 at 10.34.07 AM.jpeg" alt="Plaza de Mercado de Málaga">
+                            <div class="image-overlay">
+                                <div class="overlay-text">Sabores Auténticos</div>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h5 class="card-title">
+                                <i class="fas fa-shopping-basket"></i>
+                                Plaza de Mercado
+                            </h5>
+                            <p class="card-description">
+                                Corazón comercial donde se encuentran los productos más frescos y auténticos de la región. Punto de encuentro comercial y cultural.
+                            </p>
+                        </div>
+                        <div class="card-footer">
+                            <span class="category-badge">Comercio Local</span>
+                            <a href="https://www.google.com/maps/place/Plaza+De+Mercado+Malaga" class="map-link" target="_blank" rel="noopener noreferrer">
+                                <i class="fas fa-external-link-alt"></i> Ver Mapa
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Terminal de Cotrans -->
+                <div class="col">
+                    <div class="place-card">
+                        <div class="card-image-container">
+                            <img src="Terminal  de Cotrans.webp" alt="Terminal de Cotrans Málaga">
+                            <div class="image-overlay">
+                                <div class="overlay-text">Conectando Destinos</div>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h5 class="card-title">
+                                <i class="fas fa-bus"></i>
+                                Terminal de Cotrans
+                            </h5>
+                            <p class="card-description">
+                                Estación de transporte que conecta Málaga con otras ciudades. Facilitando la movilidad y el intercambio comercial regional.
+                            </p>
+                        </div>
+                        <div class="card-footer">
+                            <span class="category-badge">Transporte</span>
+                            <a href="https://www.google.com/maps/place/Terminal+de+Transporte+Cotrans+M%C3%A1laga" class="map-link" target="_blank" rel="noopener noreferrer">
+                                <i class="fas fa-external-link-alt"></i> Ver Mapa
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Colegio Normal Superior -->
+                <div class="col">
+                    <div class="place-card">
+                        <div class="card-image-container">
+                            <img src="normal.jpg" alt="Colegio Normal Superior de Málaga">
+                            <div class="image-overlay">
+                                <div class="overlay-text">Formando Futuro</div>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h5 class="card-title">
+                                <i class="fas fa-graduation-cap"></i>
+                                Colegio Normal Superior
+                            </h5>
+                            <p class="card-description">
+                                Institución educativa de gran tradición en la formación de docentes. Pilar fundamental en el desarrollo académico y cultural del municipio.
+                            </p>
+                        </div>
+                        <div class="card-footer">
+                            <span class="category-badge">Educación</span>
+                            <a href="https://www.google.com/maps/place/Escuela+Normal+Francisco+de+Paula+Santander" class="map-link" target="_blank" rel="noopener noreferrer">
+                                <i class="fas fa-external-link-alt"></i> Ver Mapa
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Casa de la Cultura -->
+                <div class="col">
+                    <div class="place-card">
+                        <div class="card-image-container">
+                            <img src="Captura de pantalla 2025-07-17 111257.png" alt="Casa de la Cultura de Málaga">
+                            <div class="image-overlay">
+                                <div class="overlay-text">Arte y Tradición</div>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h5 class="card-title">
+                                <i class="fas fa-theater-masks"></i>
+                                Casa de la Cultura
+                            </h5>
+                            <p class="card-description">
+                                Centro cultural donde florecen las artes, la música y las tradiciones locales. Espacio de encuentro que fortalece nuestra identidad cultural.
+                            </p>
+                        </div>
+                        <div class="card-footer">
+                            <span class="category-badge">Cultura</span>
+                            <a href="https://www.google.com/maps/place/Casa+de+la+Cultura+Simon+Gonzalez" class="map-link" target="_blank" rel="noopener noreferrer">
+                                <i class="fas fa-external-link-alt"></i> Ver Mapa
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2025 Málaga, Santander - Conoce Nuestra Hermosa Región</p>
+                <div class="footer-author">
+                    <i class="fas fa-heart" style="color: #ff6b6b;"></i> 
+                    Creado por Karen Julieth Sepúlveda Sánchez
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Botón para volver a la página principal -->
+    <a href="#" class="home-button" onclick="window.location.reload()">
+        <i class="fas fa-home"></i> Página Principal
+    </a>
+
+    <!-- Botón para volver arriba -->
+    <a href="#" class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Añadir efecto de brillo gradual a las tarjetas
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.place-card');
+            
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.setProperty('--glow-opacity', '1');
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.setProperty('--glow-opacity', '0');
+                });
+            });
+            
+            // Animación de aparición progresiva
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-in');
+                    }
+                });
+            });
+            
+            cards.forEach(card => {
+                observer.observe(card);
+            });
+
+            // Botón de volver arriba
+            const backToTopButton = document.getElementById('backToTop');
+            
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    backToTopButton.classList.add('show');
+                } else {
+                    backToTopButton.classList.remove('show');
+                }
+            });
+            
+            backToTopButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
